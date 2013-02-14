@@ -534,6 +534,12 @@ public class DialpadFragment extends Fragment
         super.onStart();
         configureScreenFromIntent(getActivity().getIntent());
         setStartedFromNewIntent(false);
+
+        super.onStart();
+
+        if (isT9On()) {
+            mT9Search.refresh(mT9Callback);
+        }
     }
 
     @Override
@@ -651,15 +657,6 @@ public class DialpadFragment extends Fragment
         // lookup the last dialed number has completed.
         mLastNumberDialed = EMPTY_NUMBER;  // Since we are going to query again, free stale number.
         SpecialCharSequenceMgr.cleanup();
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
-
-        if (isT9On()) {
-            mT9Search.refresh(mT9Callback);
-        }
     }
 
     @Override
