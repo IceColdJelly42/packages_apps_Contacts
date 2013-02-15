@@ -535,8 +535,6 @@ public class DialpadFragment extends Fragment
         configureScreenFromIntent(getActivity().getIntent());
         setStartedFromNewIntent(false);
 
-        super.onStart();
-
         if (isT9On()) {
             mT9Search.refresh(mT9Callback);
         }
