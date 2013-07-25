@@ -89,10 +89,6 @@ public class DialtactsActivity extends TransactionSafeActivity
     private static final String CALL_SETTINGS_CLASS_NAME =
             "com.android.phone.CallFeaturesSetting";
 
-    private static final String CONTACTS_PACKAGE = "com.android.contacts";
-    private static final String CALL_STATS_CLASS_NAME =
-            "com.android.contacts.callstats.CallStatsActivity";
-
     /**
      * Copied from PhoneApp. See comments in Phone app for more detail.
      */
@@ -945,13 +941,11 @@ public class DialtactsActivity extends TransactionSafeActivity
 
         // set up intents and onClick listeners
         final MenuItem callSettingsMenuItem = menu.findItem(R.id.menu_call_settings);
-        final MenuItem callStatsMenuItem = menu.findItem(R.id.menu_call_stats);
         final MenuItem searchMenuItem = menu.findItem(R.id.search_on_action_bar);
         final MenuItem filterOptionMenuItem = menu.findItem(R.id.filter_option);
         final MenuItem addContactOptionMenuItem = menu.findItem(R.id.add_contact);
 
         callSettingsMenuItem.setIntent(DialtactsActivity.getCallSettingsIntent());
-        callStatsMenuItem.setIntent(DialtactsActivity.getCallStatsIntent());
         searchMenuItem.setOnMenuItemClickListener(mSearchMenuItemClickListener);
         filterOptionMenuItem.setOnMenuItemClickListener(mFilterOptionsMenuItemClickListener);
         addContactOptionMenuItem.setIntent(
@@ -991,7 +985,6 @@ public class DialtactsActivity extends TransactionSafeActivity
         final MenuItem addContactOptionMenuItem = menu.findItem(R.id.add_contact);
         final MenuItem callSettingsMenuItem = menu.findItem(R.id.menu_call_settings);
         final MenuItem emptyRightMenuItem = menu.findItem(R.id.empty_right_menu_item);
-        final MenuItem callStatsMenuItem = menu.findItem(R.id.menu_call_stats);
 
         // prepare the menu items
         searchMenuItem.setVisible(false);
@@ -999,7 +992,6 @@ public class DialtactsActivity extends TransactionSafeActivity
         addContactOptionMenuItem.setVisible(false);
         callSettingsMenuItem.setVisible(false);
         emptyRightMenuItem.setVisible(false);
-        callStatsMenuItem.setVisible(false);
     }
 
     private void prepareOptionsMenuForDialerTab(Menu menu) {
@@ -1014,12 +1006,10 @@ public class DialtactsActivity extends TransactionSafeActivity
         final MenuItem addContactOptionMenuItem = menu.findItem(R.id.add_contact);
         final MenuItem callSettingsMenuItem = menu.findItem(R.id.menu_call_settings);
         final MenuItem emptyRightMenuItem = menu.findItem(R.id.empty_right_menu_item);
-        final MenuItem callStatsMenuItem = menu.findItem(R.id.menu_call_stats);
 
         // prepare the menu items
         filterOptionMenuItem.setVisible(false);
         addContactOptionMenuItem.setVisible(false);
-        callStatsMenuItem.setVisible(false);
         if (mDuringSwipe || mUserTabClick) {
             // During horizontal movement, the real ActionBar menu items are shown
             searchMenuItem.setVisible(true);
@@ -1047,14 +1037,12 @@ public class DialtactsActivity extends TransactionSafeActivity
         final MenuItem addContactOptionMenuItem = menu.findItem(R.id.add_contact);
         final MenuItem callSettingsMenuItem = menu.findItem(R.id.menu_call_settings);
         final MenuItem emptyRightMenuItem = menu.findItem(R.id.empty_right_menu_item);
-        final MenuItem callStatsMenuItem = menu.findItem(R.id.menu_call_stats);
 
         // prepare the menu items
         searchMenuItem.setVisible(true);
         filterOptionMenuItem.setVisible(false);
         addContactOptionMenuItem.setVisible(false);
         callSettingsMenuItem.setVisible(true);
-        callStatsMenuItem.setVisible(true);
         emptyRightMenuItem.setVisible(ViewConfiguration.get(this).hasPermanentMenuKey());
     }
 
@@ -1065,14 +1053,12 @@ public class DialtactsActivity extends TransactionSafeActivity
         final MenuItem addContactOptionMenuItem = menu.findItem(R.id.add_contact);
         final MenuItem callSettingsMenuItem = menu.findItem(R.id.menu_call_settings);
         final MenuItem emptyRightMenuItem = menu.findItem(R.id.empty_right_menu_item);
-        final MenuItem callStatsMenuItem = menu.findItem(R.id.menu_call_stats);
 
         // prepare the menu items
         searchMenuItem.setVisible(true);
         filterOptionMenuItem.setVisible(true);
         addContactOptionMenuItem.setVisible(true);
         callSettingsMenuItem.setVisible(true);
-        callStatsMenuItem.setVisible(true);
         emptyRightMenuItem.setVisible(false);
     }
 
@@ -1264,13 +1250,6 @@ public class DialtactsActivity extends TransactionSafeActivity
     public static Intent getCallSettingsIntent() {
         final Intent intent = new Intent(Intent.ACTION_MAIN);
         intent.setClassName(PHONE_PACKAGE, CALL_SETTINGS_CLASS_NAME);
-        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        return intent;
-    }
-
-    public static Intent getCallStatsIntent() {
-        final Intent intent = new Intent(Intent.ACTION_VIEW);
-        intent.setClassName(CONTACTS_PACKAGE, CALL_STATS_CLASS_NAME);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         return intent;
     }
